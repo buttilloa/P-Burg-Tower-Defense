@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SourceFileCollection xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Profile>Reach</Profile>
+  <Platform>Windows</Platform>
+  <Config />
+  <SourceFiles>
+    <File>C:/Users/antho/Documents/Visual Studio 2015/Projects/PburgTowerDefense/PburgTowerDefense/Content/eye.png</File>
+    <File>C:/Users/antho/Documents/Visual Studio 2015/Projects/PburgTowerDefense/PburgTowerDefense/Content/map.PNG</File>
+    <File>C:/Users/antho/Documents/Visual Studio 2015/Projects/PburgTowerDefense/PburgTowerDefense/Content/Range.png</File>
+    <File>C:/Users/antho/Documents/Visual Studio 2015/Projects/PburgTowerDefense/PburgTowerDefense/Content/thing.png</File>
+    <File>C:/Users/antho/Documents/Visual Studio 2015/Projects/PburgTowerDefense/PburgTowerDefense/Content/tower.png</File>
+    <File>C:/Users/antho/Documents/Visual Studio 2015/Projects/PburgTowerDefense/PburgTowerDefense/Content/Weather.bmp</File>
+    <File>C:/Users/antho/Documents/Visual Studio 2015/Projects/PburgTowerDefense/PburgTowerDefense/Content/football.png</File>
+    <File>C:/Users/antho/Documents/Visual Studio 2015/Projects/PburgTowerDefense/PburgTowerDefense/Content/pburg.png</File>
+  </SourceFiles>
+</SourceFileCollection>
