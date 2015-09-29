@@ -1,9 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace PburgTowerDefense
 {
@@ -12,12 +9,14 @@ namespace PburgTowerDefense
         Vector2 Location, Velocity;
         public Boolean Destroy = false;
         private float damage;
-
-        public Bullet(float x, float y, Vector2 velocity, float damage)
+        private Enemy Target;
+        private float bulletSpeed;
+        public Bullet(float x, float y, float BulletSpeed, float damage,Enemy target)
         {
             Location = new Vector2(x, y);
-            Velocity = velocity;
             this.damage = damage;
+            Target = target;
+            bulletSpeed = BulletSpeed;
         }
         public float Damage
         {
@@ -25,9 +24,18 @@ namespace PburgTowerDefense
         }
         public void update(GameTime time)
         {
+            Velocity = Target.Center() - Location;
+            Velocity.Normalize();
+            Velocity *= bulletSpeed;
+            if (Math.Abs(Vector2.Distance(Location, Target.Center())) <= 15)
+            {
+                Target.health -= damage;
+                damage = 0;
+                Destroy = true;
+            }
             if (Location.X > 800 || Location.X < 0 || Location.Y > 500 || Location.Y < 0)
                 Destroy = true;
-            Location += Velocity * (float)time.ElapsedGameTime.TotalSeconds;
+            Location += Velocity * (float)time.ElapsedGameTime.TotalSeconds * Game1.SpeedMultiplyer;
             // EffectManager.Effect("Enemy Cannon Fire").Trigger(new Vector2(Location.X, Location.Y));
 
         }

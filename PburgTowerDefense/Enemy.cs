@@ -36,7 +36,7 @@ namespace PburgTowerDefense
         public void update(GameTime time)
         {
 
-            float elapsed = (float)time.ElapsedGameTime.TotalSeconds;
+            float elapsed = (float)time.ElapsedGameTime.TotalSeconds * Game1.SpeedMultiplyer;
             timeForCurrentFrame += elapsed;
             x += (int)(velocity.X * elapsed * speed);
             y += (int)(velocity.Y * elapsed * speed);
@@ -59,9 +59,6 @@ namespace PburgTowerDefense
                 if (checkpoint == Game1.turns.Count)
                     Finishes = true;
             }
-            foreach (Bullet shot in Game1.shots)
-                if (shot.hit(new Vector2(x + 15, y + 15)))
-                    health -= shot.Damage;
             if (health <= 0) Finishes = true;
         }
         public int handleDamage()

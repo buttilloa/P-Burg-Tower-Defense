@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>C:/Users/antho/Documents/Visual Studio 2015/Projects/PburgTowerDefense/PburgTowerDefense/Content/Weather.bmp</SourceFile>
+  <SourceFile>C:/Users/antho/Documents/Visual Studio 2015/Projects/P-Burg-Tower-Defense/PburgTowerDefense/Content/Weather.bmp</SourceFile>
   <SourceTime>2015-02-12T19:47:06-05:00</SourceTime>
-  <DestFile>C:/Users/antho/Documents/Visual Studio 2015/Projects/PburgTowerDefense/PburgTowerDefense/Content/bin/Windows/Weather.xnb</DestFile>
-  <DestTime>2015-09-27T18:53:53.9413115-04:00</DestTime>
+  <DestFile>C:/Users/antho/Documents/Visual Studio 2015/Projects/P-Burg-Tower-Defense/PburgTowerDefense/Content/bin/Windows/Weather.xnb</DestFile>
+  <DestTime>2015-09-28T15:00:16.6603691-04:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2015-04-29T13:14:44-04:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

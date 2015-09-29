@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 
 namespace PburgTowerDefense
 {
@@ -18,12 +19,12 @@ namespace PburgTowerDefense
         int SpawnCount = 0;
         public static int Wave = 0;
         float spawntimer;
+        public static float SpeedMultiplyer = 1;
+        bool running = true;
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-            //this.IsFixedTimeStep = false;
-            //this.graphics.SynchronizeWithVerticalRetrace = false;
             this.IsMouseVisible = true;
         }
         protected override void LoadContent()
@@ -49,41 +50,55 @@ namespace PburgTowerDefense
             turns.Add(new Tile(new Rectangle(503, 241, 1, 1), "Right"));
             turns.Add(new Tile(new Rectangle(760, 222, 41, 39), "End"));
             Towers.Add(new SniperTower(200, 91));
+            //Towers.Add(new SniperTower(200, 300));
 
             base.LoadContent();
         }
+        KeyboardState oldState;
         protected override void Update(GameTime gameTime)
         {
-            spawntimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
-            if (eyes.Count == 0)
-                if (spawntimer >= 5)
+            if (keyPressed(Keys.Space))
+                if (eyes.Count == 0)
                 {
                     Wave++;
                     SpawnCount = 0;
+                    spawntimer = 1;
                 }
-            if (spawntimer >= 1 && SpawnCount < Wave * 5)
+                else
+                    running = !running;
+            if (keyPressed(Keys.F))
+                if (SpeedMultiplyer == 1) SpeedMultiplyer = 2;
+                else if (SpeedMultiplyer == 2) SpeedMultiplyer = 1;
+            if (running)
             {
-                eyes.Add(new Enemy());
-                SpawnCount++;
-                spawntimer = 0;
+                spawntimer += (float)gameTime.ElapsedGameTime.TotalSeconds * Game1.SpeedMultiplyer;
+                if (spawntimer >= 1 && SpawnCount < Wave * 5)
+                {
+                    eyes.Add(new Enemy());
+                    SpawnCount++;
+                    spawntimer = 0;
+                }
+                for (int i = shots.Count - 1; i >= 0; i--)
+                {
+                    shots[i].update(gameTime);
+                    if (shots[i].Destroy) shots.RemoveAt(i);
+                }
+                for (int i = Towers.Count - 1; i >= 0; i--)
+                {
+                    Towers[i].update(gameTime);
+                }
+                for (int i = eyes.Count - 1; i >= 0; i--)
+                {
+                    eyes[i].update(gameTime);
+                    if (eyes[i].Finishes) eyes.RemoveAt(i);
+                }
             }
-            for (int i = shots.Count - 1; i >= 0; i--)
-            {
-                shots[i].update(gameTime);
-                if (shots[i].Destroy) shots.RemoveAt(i);
-            }
-            for (int i = Towers.Count - 1; i >= 0; i--)
-            {
-                Towers[i].update(gameTime);
-            }
-            for (int i = eyes.Count - 1; i >= 0; i--)
-            {
-                eyes[i].update(gameTime);
-                if (eyes[i].Finishes) eyes.RemoveAt(i);
-            }
-
+            oldState = Keyboard.GetState();
             base.Update(gameTime);
-
+        }
+        protected bool keyPressed(Keys key)
+        {
+            return Keyboard.GetState().IsKeyUp(key) && oldState.IsKeyDown(key);
         }
         protected override void Draw(GameTime gameTime)
         {

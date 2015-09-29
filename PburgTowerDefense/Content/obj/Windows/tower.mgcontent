@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>C:/Users/antho/Documents/Visual Studio 2015/Projects/PburgTowerDefense/PburgTowerDefense/Content/tower.png</SourceFile>
+  <SourceFile>C:/Users/antho/Documents/Visual Studio 2015/Projects/P-Burg-Tower-Defense/PburgTowerDefense/Content/tower.png</SourceFile>
   <SourceTime>2015-09-27T19:21:33.8701447-04:00</SourceTime>
-  <DestFile>C:/Users/antho/Documents/Visual Studio 2015/Projects/PburgTowerDefense/PburgTowerDefense/Content/bin/Windows/tower.xnb</DestFile>
-  <DestTime>2015-09-27T19:21:38.3870702-04:00</DestTime>
+  <DestFile>C:/Users/antho/Documents/Visual Studio 2015/Projects/P-Burg-Tower-Defense/PburgTowerDefense/Content/bin/Windows/tower.xnb</DestFile>
+  <DestTime>2015-09-28T15:00:16.6453142-04:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2015-04-29T13:14:44-04:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

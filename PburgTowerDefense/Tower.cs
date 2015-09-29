@@ -8,8 +8,8 @@ namespace PburgTowerDefense
     {
         protected float rotation;
         protected float X, Y;
-        float shotTimer = 0;
-        Vector2 Target = new Vector2();
+        protected float shotTimer = 0;
+        Enemy Target;
         protected Vector2 Center = new Vector2();
         protected int Range = 0;
         protected float bulletSpeed = 250;
@@ -20,26 +20,30 @@ namespace PburgTowerDefense
         {
 
         }
+        Vector2 calcRotate = new Vector2(1, 1);
+        protected float Damage = 50;
         public virtual void update(GameTime gametime)
         {
-            shotTimer += (float)gametime.ElapsedGameTime.TotalSeconds;
+            shotTimer += (float)gametime.ElapsedGameTime.TotalSeconds * Game1.SpeedMultiplyer;
             getEnemy();
-            Vector2 calcRotate = Target - new Vector2(X, Y);
+
+            if (Target != null) calcRotate = Target.Center() - new Vector2(X, Y);
             calcRotate.Normalize();
             rotation = (float)Math.Atan2(calcRotate.Y, calcRotate.X);
 
             if (shotTimer >= TimePerShot && hasTarget)
             {
                 shotTimer = 0;
-                Vector2 vel = Target - new Vector2(X, Y);
-                vel.Normalize();
-                vel *= bulletSpeed;
-                Game1.shots.Add(new Bullet(X, Y, vel, 50));
+                FireShot();
             }
         }
         public void ShowRange(bool Show)
         {
             showRange = Show;
+        }
+        public void FireShot()
+        {
+            Game1.shots.Add(new Bullet(X, Y, bulletSpeed, Damage, Target));
         }
         public void getEnemy()
         {
@@ -61,22 +65,24 @@ namespace PburgTowerDefense
                 if (shortest != -1)
                 {
                     hasTarget = true;
-                    Target = GuessFactor(Game1.eyes[shortest]);//TestTarget.Center();
+                    Target = Game1.eyes[shortest];
                 }
                 else hasTarget = false;
             }
-            else Target = new Vector2(Mouse.GetState().X, Mouse.GetState().Y);
+            else hasTarget = false;
         }
-        private Vector2 GuessFactor(Enemy TestTarget)
+        public int handleDamage()
         {
-            float time = Math.Abs(Vector2.Distance(Center, TestTarget.Center())) / bulletSpeed;
-            Vector2 predictedPos = (TestTarget.velocity) * (time * TestTarget.speed);
-            Vector2 guess = TestTarget.Center() + predictedPos;
-            return guess;
+            int drawdamage = 0;
+            for (float i = 0; i < 10; i += .35f)
+            {
+                if (shotTimer >= (.1f * i) * TimePerShot) drawdamage++;
+            }
+            return drawdamage;
         }
         public virtual void draw(SpriteBatch batch)
         {
-
+            
         }
     }
 }
